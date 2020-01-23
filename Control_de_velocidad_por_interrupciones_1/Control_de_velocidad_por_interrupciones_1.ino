@@ -1,5 +1,7 @@
-const uint8_t PIN_STEPS = 9;                          //PIN STEP DRIVER 9
-const uint8_t PIN_DIRECCION = 8;                      //PIN DIRECCION DRIVER 8
+const uint8_t MODE_STEPS = DDH6;                          //PIN STEP DRIVER 9 PARA MODE
+const uint8_t SIGNAL_STEPS = PH6;                         //PIN STEP DRIVER 9 PARA PONER LA SEÑAL
+const uint8_t MODE_DIRECCION = DDH5;                      //PIN DIRECCION DRIVER 8 PARA MODE
+const uint8_t SIGNAL_DIRECTION = PH5;                         //PIN DIRECTION DRIVER 8 PARA PONER LA SEÑAL
 
 const uint8_t NUMERO_PASOS = 200;                     //NUMERO PASOS POR VUELTA NEMA 17
 const float LONGITUD_RUEDAS = 0.219911;               //LONGITUD RUEDAS m --> DIAMETRO (0.07m)
@@ -21,10 +23,9 @@ void setup(){
   
   Serial.begin(115200);                               //INICIAR MONITOR SERIE
   
-  pinMode(PIN_STEPS, OUTPUT);                         //ESTABLECER EL PIN CONECTADO A STEPS DEL DRIVER COMO SALIDA
-  pinMode(PIN_DIRECCION, OUTPUT);                     //ESTABLECER EL PIN CONECTADO A DIRECCION DEL DRIVER COMO SALIDA
+  DDRH |= (1 << MODE_STEPS) | (1 << MODE_DIRECCION)                         //ESTABLECER LOS PINES COMO SALIDA
   
-  digitalWrite(PIN_DIRECCION, DIRECCION_ROBOT);       //ESTABLECER SENTIDO ADELANTE COMO INICIAL 
+  PORTH |= (1 << SIGNAL_DIRECTION);       //ESTABLECER SENTIDO ADELANTE COMO INICIAL 
 }
  
 void loop(){
